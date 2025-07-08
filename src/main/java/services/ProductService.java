@@ -52,6 +52,6 @@ public class ProductService {
     }
 
     public HashMap<String, Integer> getProducts(){
-        return new HashMap<String, Integer>(products);
+        return new HashMap<>(products);
     }
 }

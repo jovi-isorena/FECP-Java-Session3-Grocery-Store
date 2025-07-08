@@ -6,11 +6,6 @@ import services.ProductService;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GroceryStoreInventorySystemTest {
-//    private GroceryStoreInventorySystem inventorySystem;
-//    @BeforeEach
-//    void setup(){
-//        inventorySystem = new ProductService();
-//    }
     @BeforeAll
     static void setup(){
         GroceryStoreInventorySystem.addProduct("Bread","5");
