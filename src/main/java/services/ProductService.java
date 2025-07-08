@@ -4,7 +4,7 @@ import models.Status;
 import java.util.HashMap;
 
 public class ProductService {
-    private HashMap<String, Integer> products = new HashMap<>();
+    private final HashMap<String, Integer> products = new HashMap<>();
 
     public Status addProduct(String productName, int quantity){
         productName = productName.trim();
@@ -52,6 +52,6 @@ public class ProductService {
     }
 
     public HashMap<String, Integer> getProducts(){
-        return this.products;
+        return new HashMap<String, Integer>(products);
     }
 }
