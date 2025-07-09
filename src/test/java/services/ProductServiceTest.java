@@ -19,7 +19,7 @@ class ProductServiceTest {
     }
     @Test
     void shouldReturnProductExistsAddingValidProduct() {
-        assertEquals(Status.PRODUCT_EXISTS, productService.addProduct("Bread",10));
+        assertEquals(Status.ADDING_EXISTING_PRODUCT, productService.addProduct("Bread",10));
     }
     @Test
     void shouldReturnNameEmptyAddingInvalidProductEmptyName() {

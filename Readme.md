@@ -14,8 +14,8 @@ FECP-Java-Session3-Grocery-Store
 
 ### Unit Testing Output
 **GroceryStoreInventorySystem class**
-![unit testing](./screenshots/testing-1.png)
-![unit testing](./screenshots/testing-2.png)
-**ProductService class**
-![unit testing](./screenshots/testing-3.png)
-![unit testing](./screenshots/testing-4.png)
+![main class unit testing](./screenshots/testing-1.png)
+![main class unit testing coverage](./screenshots/testing-2.png)
+**Additional testing for ProductService class**
+![ProductService unit testing](./screenshots/testing-3.png)
+![ProductService unit testing coverage](./screenshots/testing-4.png)

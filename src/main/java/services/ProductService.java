@@ -10,10 +10,11 @@ public class ProductService {
         productName = productName.trim();
         if( productName.isEmpty()){
             return Status.PRODUCT_NAME_EMPTY;
-        }else if(products.containsKey(productName)){
-            return Status.PRODUCT_EXISTS;
         }else if(quantity<0){
             return Status.NEGATIVE_QUANTITY;
+        }else if(products.containsKey(productName)){
+            products.replace(productName, quantity);
+            return Status.ADDING_EXISTING_PRODUCT;
         }else{
             products.put(productName, quantity);
             return Status.PRODUCT_ADDED;

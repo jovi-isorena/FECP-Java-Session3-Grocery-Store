@@ -6,10 +6,10 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class GroceryStoreInventorySystem {
-    static HashMap<String, Integer> products = new HashMap<String, Integer>();
     static Scanner sc = new Scanner(System.in);
-    static ProductService productService = new ProductService();
+    static ProductService productService;
     public static void main(String[] args) {
+        setProductService(new ProductService());
         String selection;
         do{
             displayMenu();
@@ -25,14 +25,14 @@ public class GroceryStoreInventorySystem {
                     String name = sc.nextLine();
                     System.out.print("Enter quantity: ");
                     String quantity = sc.nextLine();
-                    addProduct(name, quantity);
+                    System.out.println(addProduct(name, quantity));
                     break;
                 }
                 case "3":{
                     // check
                     System.out.print("Enter product name: ");
                     String name = sc.nextLine();
-                    checkProduct(name);
+                    System.out.println(checkProduct(name));
                     break;
                 }
                 case "4":{
@@ -41,14 +41,14 @@ public class GroceryStoreInventorySystem {
                     String name = sc.nextLine();
                     System.out.print("Enter new stock quantity: ");
                     String quantity = sc.nextLine();
-                    updateProduct(name, quantity);
+                    System.out.println(updateProduct(name, quantity));
                     break;
                 }
                 case "5": {
                     //remove
                     System.out.print("Enter product to remove: ");
                     String name = sc.nextLine();
-                    removeProduct(name);
+                    System.out.println(removeProduct(name));
                     break;
                 }
                 case "6":
@@ -68,49 +68,45 @@ public class GroceryStoreInventorySystem {
         System.out.println("6. Exit");
         System.out.print("Choose an option: ");
     }
-    public static boolean addProduct(String name, String quantity){
+    public static String addProduct(String name, String quantity){
         int dQuantity = 0;
         Status result = null;
         try{
             dQuantity = Integer.parseInt(quantity);
             result = productService.addProduct(name, dQuantity);
-            System.out.println(result.getDescription());
-            return (result == Status.PRODUCT_ADDED);
+            return result.toString();
         }catch(NumberFormatException e){
             result = Status.INVALID_QUANTITY;
-            System.out.println(result.getDescription());
-            return false;
+            return result.toString();
         }
     }
-    public static int checkProduct(String name){
+    public static String checkProduct(String name){
         int quantity = productService.checkProduct(name);
+        String result;
         if(quantity == -1){
-            System.out.println("Item not in inventory.");
+            result = "Product not found.";
         }else if(quantity == 0){
-            System.out.println("Item does not have stock.");
+            result = "Product does not have stock.";
         }else{
-            System.out.println(name + " is in stock: " + quantity);
+            result = name + " is in stock: " + quantity;
         }
-        return quantity;
+        return result;
     }
-    public static boolean updateProduct(String name, String quantity){
+    public static String updateProduct(String name, String quantity){
         int dQuantity = 0;
         Status result = null;
         try{
             dQuantity = Integer.parseInt(quantity);
             result = productService.updateProduct(name, dQuantity);
-            System.out.println(result.getDescription());
-            return (result == Status.PRODUCT_UPDATED);
+            return result.toString();
         }catch(NumberFormatException e){
             result = Status.INVALID_QUANTITY;
-            System.out.println(result.getDescription());
-            return false;
+            return result.toString();
         }
     }
-    public static boolean removeProduct(String name){
+    public static String removeProduct(String name){
         Status result = productService.removeProduct(name);
-        System.out.println(result.getDescription());
-        return result == Status.PRODUCT_REMOVED;
+        return result.toString();
     }
     public static int viewInventory(){
         HashMap<String, Integer> products = productService.getProducts();
@@ -125,6 +121,7 @@ public class GroceryStoreInventorySystem {
         }
         return size;
     }
-
-
+    public static void setProductService(ProductService productService) {
+        GroceryStoreInventorySystem.productService = productService;
+    }
 }
